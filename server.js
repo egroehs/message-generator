@@ -35,7 +35,7 @@ app.get("/random", async (req, res) => {
     const token = await getAccessToken();
     
     // Fetch new releases
-    const randomOffset = Math.floor(Math.random() * 50); 
+    const randomOffset = Math.floor(Math.random() * 100); 
      const options = {
        url: `https://api.spotify.com/v1/browse/new-releases?limit=10&offset=${randomOffset}`,
        headers: { Authorization: "Bearer " + token },
