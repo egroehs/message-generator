@@ -33,13 +33,13 @@ const getAccessToken = async () => {
 app.get("/random", async (req, res) => {
   try {
     const token = await getAccessToken();
-    console.log("Token:", token); // Log the token to check if it's being fetched
-
+    
     // Fetch new releases
-    const options = {
-      url: "https://api.spotify.com/v1/browse/new-releases?limit=10", // Increase the limit to get more albums
-      headers: { Authorization: "Bearer " + token },
-    };
+    const randomOffset = Math.floor(Math.random() * 50); 
+     const options = {
+       url: `https://api.spotify.com/v1/browse/new-releases?limit=10&offset=${randomOffset}`,
+       headers: { Authorization: "Bearer " + token },
+     };
 
     const response = await axios.get(options.url, { headers: options.headers });
     console.log("Spotify Response:", response.data); // Log the Spotify API response
