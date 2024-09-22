@@ -31,6 +31,7 @@ const RandomTrack = () => {
           <h2>Song: {trackInfo.track}</h2>
           <h3>Artist: {trackInfo.artist}</h3>
           <p>Album: {trackInfo.album}</p>
+          <img src={trackInfo.albumCover} />
         </div>
       )}
     </div>

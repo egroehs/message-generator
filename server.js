@@ -69,25 +69,28 @@ app.get("/random", async (req, res) => {
     });
     const artistData = artistResponse.data;
 
-   const tracksResponse = await axios.get(randomAlbum.href + "/tracks", {
-     headers: { Authorization: "Bearer " + token },
-   });
+   const tracksResponse = await axios.get(
+     `https://api.spotify.com/v1/albums/${randomAlbum.id}/tracks`,
+     {
+       headers: { Authorization: "Bearer " + token },
+     }
+   );
+
    const tracks = tracksResponse.data.items;
+   console.log("Tracks Response:", tracksResponse.data);
+
 
    if (!tracks || tracks.length === 0) {
      return res.status(404).json({ error: "No tracks found in the album" });
    }
 
-   // Randomly select a track from the album
-   const randomTrackIndex = Math.floor(Math.random() * tracks.length);
-   const randomTrack = tracks[randomTrackIndex];
-
-   res.json({
-     track: randomTrack.name || "No track found",
-     artist: artistData.name,
-     album: randomAlbum.name,
-     artistDetails: artistData,
-   });
+     res.json({
+       track: tracks.length > 0 ? tracks[0].name : "No track found",
+       artist: artistData.name,
+       album: randomAlbum.name,
+       artistDetails: artistData,
+       albumCover: randomAlbum.images[0]?.url,
+     });
   } catch (error) {
     console.error(
       "Error fetching data:",
