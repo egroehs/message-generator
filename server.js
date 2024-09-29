@@ -7,8 +7,8 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 
-const client_id = "bdda6c6294744e038261ab524155ce5d";
-const client_secret = "b2f99d28ca934d10ab369bfca4e63f6d";
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
 // Get Spotify access token
 const getAccessToken = async () => {
